@@ -348,24 +348,26 @@ public class SocialGagActivity extends FBConnectionActivity {
 		
 
 		String urlString = actPost.getUrl();
+		
+		Toast.makeText(SocialGagActivity.this,"lat and long: " +  urlString, Toast.LENGTH_SHORT).show();
 
-		URL url = null;
-		try{
-			url = new URL(urlString);
-			if(url != null)
-			{
-				InputStream openStream = url.openStream();
-				actPic.setImageBitmap(BitmapFactory.decodeStream(openStream));
-				openStream.close();
-			}
-		}
-		catch(MalformedURLException exception)
-		{
-			Toast.makeText(SocialGagActivity.this,"This is not a valid url for this picture", Toast.LENGTH_SHORT).show();
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+//		URL url = null;
+//		try{
+//			url = new URL(urlString);
+//			if(url != null)
+//			{
+//				InputStream openStream = url.openStream();
+//				actPic.setImageBitmap(BitmapFactory.decodeStream(openStream));
+//				openStream.close();
+//			}
+//		}
+//		catch(MalformedURLException exception)
+//		{
+//			Toast.makeText(SocialGagActivity.this,"This is not a valid url for this picture", Toast.LENGTH_SHORT).show();
+//		}
+//		catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
 
 		if(nextPost + 1 < posts.size())
 		{

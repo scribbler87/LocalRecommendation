@@ -3,7 +3,7 @@
 
     <string name="fileContent">"File content haven't been loaded,yet."</string>
     <string name="app_name">Assignment_3</string>
-	<string name="urlDefault">https://playground.cs.hut.fi/t-110.5140_2012/hello.jpg</string>
+	<string name="urlDefault">60.148587,24.66556</string>
 	<string name="woeidDefault">565346</string>
 	<string name="weatherData">Please, insert WOEID and Confirm</string>
 	<string name="socialgags">SocialGags</string>

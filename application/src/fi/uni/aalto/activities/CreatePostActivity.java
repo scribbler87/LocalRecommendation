@@ -56,7 +56,7 @@ public class CreatePostActivity extends Activity
 						urlPic.setImageBitmap(BitmapFactory.decodeStream(openStream));
 						openStream.close();
 						
-						String str =HTTPHelper.sendPostPost(sTitle, sDescritption, SocialGagActivity.USER_ID, SocialGagActivity.access_token, urlString);
+						String str = HTTPHelper.sendPostPost(sTitle, sDescritption, SocialGagActivity.USER_ID, SocialGagActivity.access_token, urlString);
 						System.err.println(str);
 					}
 				}
@@ -96,13 +96,13 @@ public class CreatePostActivity extends Activity
 		case R.id.socialGags:   intent = new Intent(CreatePostActivity.this, SocialGagActivity.class);
 		startActivity(intent);
 		break;
-		case R.id.post:     intent = new Intent(CreatePostActivity.this, CreatePostActivity.class);
+		case R.id.post:    		intent = new Intent(CreatePostActivity.this, CreatePostActivity.class);
 		startActivity(intent);
 		break;
-		case R.id.profile:  intent = new Intent(CreatePostActivity.this, ProfileActivity.class);
+		case R.id.profile:  	intent = new Intent(CreatePostActivity.this, ProfileActivity.class);
 		startActivity(intent);
 		break;
-		case R.id.friends:  intent = new Intent(CreatePostActivity.this, LocateFriendsActivity.class);
+		case R.id.friends: 	 	intent = new Intent(CreatePostActivity.this, LocateFriendsActivity.class);
 		startActivity(intent);
 		break;
 		}
