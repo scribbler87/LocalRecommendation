@@ -85,11 +85,10 @@ public class ProfileActivity extends Activity{
 	private void getProfile() throws ParserConfigurationException, SAXException,
 	IOException, URISyntaxException {
 		// create url for getting information about location from the according woeid
-//		String urlString = "http://group14.naf.cs.hut.fi/users/" + SocialGagActivity.USER_ID;
-		String urlString = "http://127.0.0.1:8080/users/"+ SocialGagActivity.USER_ID;
+		String urlString = LocalRecommendationsActivity.BASE_ADDRESS + "/users/"+ LocalRecommendationsActivity.USER_ID;
 
 		ImageView profilePic = (ImageView) findViewById(R.id.imageViewProfilePic);
-		URL img_value =  new URL("http://graph.facebook.com/"+SocialGagActivity.USER_ID+"/picture?type=large");
+		URL img_value =  new URL("http://graph.facebook.com/"+LocalRecommendationsActivity.USER_ID+"/picture?type=large");
 		Bitmap userPicBitMap = BitmapFactory.decodeStream(img_value.openConnection().getInputStream());
 		profilePic.setImageBitmap(userPicBitMap);
 
@@ -168,31 +167,7 @@ public class ProfileActivity extends Activity{
 		}
 
 	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu, menu);
-		return true;
-	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = null;
-		switch (item.getItemId()) {
-		case R.id.socialGags:   intent = new Intent(ProfileActivity.this, SocialGagActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.post:     intent = new Intent(ProfileActivity.this, CreatePostActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.profile:  intent = new Intent(ProfileActivity.this, ProfileActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.friends:  intent = new Intent(ProfileActivity.this, LocateFriendsActivity.class);
-		startActivity(intent);
-		break;
-		}
-		return true;
-	}
+	
 
 
 }

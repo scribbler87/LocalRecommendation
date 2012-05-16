@@ -2,8 +2,8 @@
 <resources>
 
     <string name="fileContent">"File content haven't been loaded,yet."</string>
-    <string name="app_name">Assignment_3</string>
-	<string name="urlDefault">60.148587,24.66556</string>
+    <string name="app_name">LocalRecommendation</string>
+	<string name="urlDefault">http://blog.usingmiles.com/wp-content/uploads/2012/02/Aiga_restaurant_inv.gif</string>
 	<string name="woeidDefault">565346</string>
 	<string name="weatherData">Please, insert WOEID and Confirm</string>
 	<string name="socialgags">SocialGags</string>

@@ -19,14 +19,14 @@ public class MainActivity extends TabActivity {
 
 		mTabHost = getTabHost();
 
-		Intent intent = new Intent(MainActivity.this, SocialGagActivity.class);
+		Intent intent = new Intent(MainActivity.this, LocalRecommendationsActivity.class);
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("BasicInfos").setContent(intent)); 
 		
-		intent = new Intent(MainActivity.this,LocateFriendsActivity.class);
+		intent = new Intent(MainActivity.this,RecommendationMapActivity.class);
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Friends").setContent(intent));
 		
-		intent = new Intent(MainActivity.this,CreatePostActivity.class);
-		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("CreatePost").setContent(intent));
+//		intent = new Intent(MainActivity.this,CreateRecommendationActivity.class);
+//		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("CreatePost").setContent(intent));
 		
 		intent = new Intent(MainActivity.this,ProfileActivity.class);
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Profile").setContent(intent));

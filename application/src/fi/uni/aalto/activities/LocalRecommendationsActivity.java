@@ -47,7 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class SocialGagActivity extends FBConnectionActivity {
+public class LocalRecommendationsActivity extends FBConnectionActivity {
 
 
 	private ArrayList<Post> posts; 
@@ -65,10 +65,9 @@ public class SocialGagActivity extends FBConnectionActivity {
 	public static final String APP_ID = "209858342455450";
 	private boolean myPost = false;
 	private ImageView actPic;
-//	public static final String urlLogin = "http://group14.naf.cs.hut.fi/mobilelogin";
-//	public static final String urlLocation = "http://group14.naf.cs.hut.fi/location";
-	public static final String urlLogin = "http://127.0.0.1:8080/mobilelogin";
-	public static final String urlLocation = "http://127.0.0.1:8080/location";
+	public static final String BASE_ADDRESS = "http://80.221.9.59:47314";
+	public static final String urlLogin = BASE_ADDRESS + "/mobilelogin";
+	public static final String urlLocation = BASE_ADDRESS  + "/location";
 
 
 	@Override
@@ -236,7 +235,9 @@ public class SocialGagActivity extends FBConnectionActivity {
 	private void getPosts() throws ParserConfigurationException, SAXException,
 	IOException, URISyntaxException {
 		//			 create url for getting information about location from the according woeid
-		String urlString = "http://group14.naf.cs.hut.fi/";
+//		String urlString = "http://group14.naf.cs.hut.fi/";
+		String urlString = BASE_ADDRESS;
+		
 		if(this.myPost)
 		{
 			urlString += "post/" + USER_ID;
@@ -286,7 +287,7 @@ public class SocialGagActivity extends FBConnectionActivity {
 				userData = XMLHelper.getUserData(wallEl, "error");
 				if(userData != null)
 				{
-					Toast.makeText(SocialGagActivity.this,"There is no post at the moment. Maybe the server is not available at the moment" +
+					Toast.makeText(LocalRecommendationsActivity.this,"There is no post at the moment. Maybe the server is not available at the moment" +
 							"Please try later again.", Toast.LENGTH_SHORT).show();
 					return;
 				}
@@ -315,13 +316,13 @@ public class SocialGagActivity extends FBConnectionActivity {
 			{
 				if(myPost)
 				{
-					Toast.makeText(SocialGagActivity.this,"You don't have post any pictures yet. Switch to general view.", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LocalRecommendationsActivity.this,"You don't have post any pictures yet. Switch to general view.", Toast.LENGTH_SHORT).show();
 					this.myPost = false;
 					this.checkMyPost.setChecked(this.myPost);
 					getPosts();
 				}
 				else
-					Toast.makeText(SocialGagActivity.this,"There are no posts in the server.", Toast.LENGTH_SHORT).show();
+					Toast.makeText(LocalRecommendationsActivity.this,"There are no posts in the server.", Toast.LENGTH_SHORT).show();
 			}
 		}
 
@@ -334,7 +335,7 @@ public class SocialGagActivity extends FBConnectionActivity {
 
 		if(posts.size() == 0)
 		{
-			Toast.makeText(SocialGagActivity.this,"There is no post at the moment. Please login.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(LocalRecommendationsActivity.this,"There is no post at the moment. Please login.", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -351,25 +352,7 @@ public class SocialGagActivity extends FBConnectionActivity {
 
 		String urlString = actPost.getUrl();
 		
-		Toast.makeText(SocialGagActivity.this,"lat and long: " +  urlString, Toast.LENGTH_SHORT).show();
-
-//		URL url = null;
-//		try{
-//			url = new URL(urlString);
-//			if(url != null)
-//			{
-//				InputStream openStream = url.openStream();
-//				actPic.setImageBitmap(BitmapFactory.decodeStream(openStream));
-//				openStream.close();
-//			}
-//		}
-//		catch(MalformedURLException exception)
-//		{
-//			Toast.makeText(SocialGagActivity.this,"This is not a valid url for this picture", Toast.LENGTH_SHORT).show();
-//		}
-//		catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
+		Toast.makeText(LocalRecommendationsActivity.this,"lat and long: " +  urlString, Toast.LENGTH_SHORT).show();
 
 		if(nextPost + 1 < posts.size())
 		{
@@ -382,32 +365,6 @@ public class SocialGagActivity extends FBConnectionActivity {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu, menu);
-		return true;
-	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent = null;
-		switch (item.getItemId()) {
-		case R.id.socialGags:   intent = new Intent(SocialGagActivity.this, SocialGagActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.post:     intent = new Intent(SocialGagActivity.this, CreatePostActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.profile:  intent = new Intent(SocialGagActivity.this, ProfileActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.friends:  intent = new Intent(SocialGagActivity.this, LocateFriendsActivity.class);
-		startActivity(intent);
-		break;
-		}
-		return true;
-	}
-	
 
 	/**
 	 * Extract the user data from FB

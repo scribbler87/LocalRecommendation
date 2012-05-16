@@ -49,7 +49,7 @@ import android.widget.Toast;
  * @author jens
  *
  */
-public class LocateFriendsActivity extends MapActivity implements LocationListener{
+public class RecommendationMapActivity extends MapActivity implements LocationListener{
 
 
 	/* socialgags>
@@ -73,7 +73,7 @@ place> 0..*
 
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		setContentView(R.layout.locate_your_friends); // bind the layout to the activity
+		setContentView(R.layout.recommendations_map); // bind the layout to the activity
 
 		// Configure the Map
 		mapView = (MapView) findViewById(R.id.mapView);
@@ -116,9 +116,9 @@ place> 0..*
 	public void getFriendsAndAddMarker()
 	{
 		try {
-			String xmlFile = HTTPHelper.getGetData(SocialGagActivity.first_name, SocialGagActivity.last_name, 
-					SocialGagActivity.expires, SocialGagActivity.USER_ID,
-					SocialGagActivity.access_token, "http://group14.naf.cs.hut.fi/location");
+			String xmlFile = HTTPHelper.getGetData(LocalRecommendationsActivity.first_name, LocalRecommendationsActivity.last_name, 
+					LocalRecommendationsActivity.expires, LocalRecommendationsActivity.USER_ID,
+					LocalRecommendationsActivity.access_token, LocalRecommendationsActivity.BASE_ADDRESS + "/location");
 
 			if("".equals(xmlFile))
 			{
@@ -169,7 +169,7 @@ place> 0..*
 					userData = XMLHelper.getUserData(wallEl, "error");
 					if(userData != null)
 					{
-						Toast.makeText(LocateFriendsActivity.this,"There are no friends which also use this app.", Toast.LENGTH_SHORT).show();
+						Toast.makeText(RecommendationMapActivity.this,"There are no friends which also use this app.", Toast.LENGTH_SHORT).show();
 						return;
 					}
 
@@ -252,18 +252,10 @@ place> 0..*
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = null;
 		switch (item.getItemId()) {
-		case R.id.socialGags:   intent = new Intent(LocateFriendsActivity.this, SocialGagActivity.class);
+		case R.id.post:     intent = new Intent(RecommendationMapActivity.this, CreateRecommendationActivity.class);
 		startActivity(intent);
 		break;
-		case R.id.post:     intent = new Intent(LocateFriendsActivity.this, CreatePostActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.profile:  intent = new Intent(LocateFriendsActivity.this, ProfileActivity.class);
-		startActivity(intent);
-		break;
-		case R.id.friends:  intent = new Intent(LocateFriendsActivity.this, LocateFriendsActivity.class);
-		startActivity(intent);
-		break;
+		
 		}
 		return true;
 	}

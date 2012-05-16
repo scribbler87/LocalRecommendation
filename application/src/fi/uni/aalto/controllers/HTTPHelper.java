@@ -23,13 +23,14 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 
+import fi.uni.aalto.activities.LocalRecommendationsActivity;
+
 public class HTTPHelper {
 	public static String executePostRequest( HashMap<String, String> pairData, String url) {
 		String res = "";
 		// Create a new HttpClient and Post Header
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(url);
-
 		httppost.setHeader("User-Agent", "dalvik");
 
 
@@ -80,6 +81,7 @@ public class HTTPHelper {
 			//			return res;
 		}
 
+		StringBuilder stringBuilder = new StringBuilder();
 
 		String answer = "";
 		for ( int c; ( c = bufferedReader.read() ) != -1; ) 
@@ -97,8 +99,7 @@ public class HTTPHelper {
 	public static String sendPostPost(String title, String description, String id, String access_token, String picUrl) throws MalformedURLException, IOException, JSONException
 	{
 		String res = "";
-//		String destUrl = "http://group14.naf.cs.hut.fi/post/create";
-		String destUrl = "localhost:8080/post/create";
+		String destUrl = LocalRecommendationsActivity.BASE_ADDRESS + "/post/create";
 
 		HashMap<String, String> data = new HashMap<String, String>();
 		data.put("title", title);
@@ -121,7 +122,7 @@ public class HTTPHelper {
 		data.put("id",id);
 		data.put("access_token", access_token);
 
-		res = executeGetRequest(data, url);//PostRequest( data, url);
+		res = executePostRequest( data, url);
 		return res;
 	}
 
@@ -171,7 +172,9 @@ public class HTTPHelper {
 			res = readResponse(response);
 
 		} catch (ClientProtocolException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
