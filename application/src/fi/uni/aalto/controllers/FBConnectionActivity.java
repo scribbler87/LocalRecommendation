@@ -68,6 +68,7 @@ public abstract class FBConnectionActivity extends Activity {
 			mFacebook.setAccessToken(access_token);
 			mFacebook.setAccessExpires(expires);
 		}
+		
 		return mFacebook.isSessionValid();
 	}
 

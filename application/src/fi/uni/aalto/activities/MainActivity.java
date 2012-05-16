@@ -19,9 +19,10 @@ public class MainActivity extends TabActivity {
 
 		mTabHost = getTabHost();
 
-//		Intent 
+		Intent intent = new Intent(MainActivity.this, SocialGagActivity.class);
+		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("BasicInfos").setContent(intent)); 
 		
-		Intent intent = new Intent(MainActivity.this,LocateFriendsActivity.class);
+		intent = new Intent(MainActivity.this,LocateFriendsActivity.class);
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Friends").setContent(intent));
 		
 		intent = new Intent(MainActivity.this,CreatePostActivity.class);
@@ -30,8 +31,7 @@ public class MainActivity extends TabActivity {
 		intent = new Intent(MainActivity.this,ProfileActivity.class);
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Profile").setContent(intent));
 		
-		intent = new Intent(MainActivity.this, SocialGagActivity.class);
-		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("BasicInfos").setContent(intent));
+		
 		
 		
 		

@@ -85,7 +85,8 @@ public class ProfileActivity extends Activity{
 	private void getProfile() throws ParserConfigurationException, SAXException,
 	IOException, URISyntaxException {
 		// create url for getting information about location from the according woeid
-		String urlString = "http://group14.naf.cs.hut.fi/users/" + SocialGagActivity.USER_ID;
+//		String urlString = "http://group14.naf.cs.hut.fi/users/" + SocialGagActivity.USER_ID;
+		String urlString = "http://127.0.0.1:8080/users/"+ SocialGagActivity.USER_ID;
 
 		ImageView profilePic = (ImageView) findViewById(R.id.imageViewProfilePic);
 		URL img_value =  new URL("http://graph.facebook.com/"+SocialGagActivity.USER_ID+"/picture?type=large");

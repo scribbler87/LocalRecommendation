@@ -65,8 +65,10 @@ public class SocialGagActivity extends FBConnectionActivity {
 	public static final String APP_ID = "209858342455450";
 	private boolean myPost = false;
 	private ImageView actPic;
-	public static final String urlLogin = "http://group14.naf.cs.hut.fi/mobilelogin";
-	public static final String urlLocation = "http://group14.naf.cs.hut.fi/location";
+//	public static final String urlLogin = "http://group14.naf.cs.hut.fi/mobilelogin";
+//	public static final String urlLocation = "http://group14.naf.cs.hut.fi/location";
+	public static final String urlLogin = "http://127.0.0.1:8080/mobilelogin";
+	public static final String urlLocation = "http://127.0.0.1:8080/location";
 
 
 	@Override

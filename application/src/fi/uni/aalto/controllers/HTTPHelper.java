@@ -80,7 +80,6 @@ public class HTTPHelper {
 			//			return res;
 		}
 
-		StringBuilder stringBuilder = new StringBuilder();
 
 		String answer = "";
 		for ( int c; ( c = bufferedReader.read() ) != -1; ) 
@@ -98,7 +97,8 @@ public class HTTPHelper {
 	public static String sendPostPost(String title, String description, String id, String access_token, String picUrl) throws MalformedURLException, IOException, JSONException
 	{
 		String res = "";
-		String destUrl = "http://group14.naf.cs.hut.fi/post/create";
+//		String destUrl = "http://group14.naf.cs.hut.fi/post/create";
+		String destUrl = "localhost:8080/post/create";
 
 		HashMap<String, String> data = new HashMap<String, String>();
 		data.put("title", title);
@@ -121,7 +121,7 @@ public class HTTPHelper {
 		data.put("id",id);
 		data.put("access_token", access_token);
 
-		res = executePostRequest( data, url);
+		res = executeGetRequest(data, url);//PostRequest( data, url);
 		return res;
 	}
 

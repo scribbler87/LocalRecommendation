@@ -1,6 +1,5 @@
 package fi.uni.aalto.activities;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -47,31 +46,42 @@ public class CreatePostActivity extends Activity
 				if(sDescritption == "")
 					Toast.makeText(CreatePostActivity.this,"Please add a description.", Toast.LENGTH_SHORT).show();
 				
-				URL url = null;
-				try{
-					url = new URL(urlString);
-					if(url != null)
-					{
-						InputStream openStream = url.openStream();
-						urlPic.setImageBitmap(BitmapFactory.decodeStream(openStream));
-						openStream.close();
-						
-						String str = HTTPHelper.sendPostPost(sTitle, sDescritption, SocialGagActivity.USER_ID, SocialGagActivity.access_token, urlString);
-						System.err.println(str);
-					}
-				}
-				catch(MalformedURLException exception)
-				{
-					Toast.makeText(CreatePostActivity.this,"This is not a valid url for this picture", Toast.LENGTH_SHORT).show();
-				}
-				catch (FileNotFoundException e) {
-					Toast.makeText(CreatePostActivity.this,"This is not a valid url for a picture", Toast.LENGTH_SHORT).show();
+				String str = "";
+				try {
+					str = HTTPHelper.sendPostPost(sTitle, sDescritption, SocialGagActivity.USER_ID, SocialGagActivity.access_token, urlString);
+				} catch (MalformedURLException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				System.err.println("bla: " + str);
+//				URL url = null;
+//				try{
+//					url = new URL(urlString);
+//					if(url != null)
+//					{
+//						InputStream openStream = url.openStream();
+//						urlPic.setImageBitmap(BitmapFactory.decodeStream(openStream));
+//						openStream.close();
+//						
+//						String str = HTTPHelper.sendPostPost(sTitle, sDescritption, SocialGagActivity.USER_ID, SocialGagActivity.access_token, urlString);
+//						System.err.println(str);
+//					}
+//				}
+//				catch(MalformedURLException exception)
+//				{
+//					Toast.makeText(CreatePostActivity.this,"This is not a valid url for this picture", Toast.LENGTH_SHORT).show();
+//				}
+//				catch (FileNotFoundException e) {
+//					Toast.makeText(CreatePostActivity.this,"This is not a valid url for a picture", Toast.LENGTH_SHORT).show();
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				} catch (JSONException e) {
+//					e.printStackTrace();
+//				}
 			}
 		});
 
