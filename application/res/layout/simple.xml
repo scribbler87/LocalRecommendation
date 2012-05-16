@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textviewFileCon"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fileContent" />
+
+    <EditText
+        android:id="@+id/editTextUrlImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/urlDefault" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/buttonURLConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm_url" />
+
+    
+       <Button
+        android:id="@+id/buttonInfoVisualizer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Information Visualizer" />
+
+    <ImageView
+        android:id="@+id/imageViewURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

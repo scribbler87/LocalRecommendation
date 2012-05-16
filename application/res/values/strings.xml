@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="fileContent">"File content haven't been loaded,yet."</string>
+    <string name="app_name">Assignment_3</string>
+	<string name="urlDefault">https://playground.cs.hut.fi/t-110.5140_2012/hello.jpg</string>
+	<string name="woeidDefault">565346</string>
+	<string name="weatherData">Please, insert WOEID and Confirm</string>
+	<string name="socialgags">SocialGags</string>
+	<string name="weather_view">Weather View</string>
+	<string name="confirm_url">Confirm URL</string>
+	<string name="next_comment">Next Comment</string>
+	<string name="title">Title</string>
+	<string name="description">Description</string>
+	<string name="confirm_woeid">Confirm WOEID</string>
+	<string name="enter">Log in to Facebook</string>
+	<string name="welcome">Welcome</string>
+    
+	
+</resources>

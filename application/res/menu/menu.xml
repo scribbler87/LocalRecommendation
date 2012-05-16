@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/socialGags"
+        android:title="SocialGags"/>
+
+    <item
+        android:id="@+id/post"
+        android:title="Create Post"/>
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"/>
+    
+     <item
+        android:id="@+id/friends"
+        android:title="Friends with this app"/>
+     
+     
+
+</menu>

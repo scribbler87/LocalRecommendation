@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayoutOutside"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:isScrollContainer="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Title:" />
+
+            <EditText
+                android:id="@+id/edittextTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" 
+                android:text="TestTitle"/>
+
+            <TextView
+                android:id="@+id/textViewDescript"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Description:" />
+
+            <EditText
+                android:id="@+id/edittextDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="166dp"
+                android:scrollbars="vertical"
+                android:text= "This is a test description." />
+
+            <EditText
+                android:id="@+id/edittextURL"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:text="@string/urlDefault" />
+
+            <Button
+                android:id="@+id/buttonSendPost"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Post" />
+
+            <ImageView
+                android:id="@+id/imgViewPost"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="centerInside" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

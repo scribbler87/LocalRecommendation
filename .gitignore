@@ -1,0 +1,7 @@
+.metadata
+*.class
+R.java
+bin/
+lint.xml
+.gitignore~
+*.pyc

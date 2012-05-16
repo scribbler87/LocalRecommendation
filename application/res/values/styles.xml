@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="buttonStyle1" parent="android:Widget.Button">
+        <item name="android:background">#AA000000</item>
+        <item name="android:layout_marginBottom">20dip</item>
+        <item name="android:padding">12dip</item>
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+</resources>

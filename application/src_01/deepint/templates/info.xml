@@ -1,0 +1,6 @@
+{% extends "base.xml" %}
+{% block content %}
+    <error>
+        {{ explan|safe }}
+    </error>
+{% endblock %}

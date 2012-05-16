@@ -1,0 +1,12 @@
+{% extends "base.xml" %}
+
+{%block content %}
+<userInfo>
+    <name>{{userT.first_name}}</name>
+    <surname>{{userT.last_name}}</surname>
+    <username>{{userT.username}}</username>
+    <gender>{{extrainfo.gender}}</gender>
+    <dateOfBirth>{{extrainfo.dateofbirth}}</dateOfBirth>
+    <location>{{extrainfo.userlocation.name}}</location>
+</userInfo>
+{% endblock %}

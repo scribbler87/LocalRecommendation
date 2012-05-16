@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<socialgags>
+
+    <!-- Extra things in head block -->
+    {% block content %}
+    {% endblock %}
+    <!-- End-->
+
+</socialgags>
