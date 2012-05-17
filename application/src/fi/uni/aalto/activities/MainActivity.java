@@ -23,19 +23,14 @@ public class MainActivity extends TabActivity {
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("BasicInfos").setContent(intent)); 
 		
 		intent = new Intent(MainActivity.this,RecommendationMapActivity.class);
-		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Friends").setContent(intent));
-		
-//		intent = new Intent(MainActivity.this,CreateRecommendationActivity.class);
-//		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("CreatePost").setContent(intent));
+		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Restaurants").setContent(intent));
 		
 		intent = new Intent(MainActivity.this,ProfileActivity.class);
 		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Profile").setContent(intent));
 		
+//		intent = new Intent(MainActivity.this,SettingsActivity.class);
+//		mTabHost.addTab(mTabHost.newTabSpec("tab_test2").setIndicator("Settings").setContent(intent));
 		
-		
-		
-		
-
 		mTabHost.setCurrentTab(0);
 
 		

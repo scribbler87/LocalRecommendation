@@ -33,6 +33,10 @@
             android:label="Create Recommendation" >
         </activity>
         <activity
+            android:name=".SettingsActivity"
+            android:label="Settings" >
+        </activity>
+        <activity
             android:name=".RecommendationMapActivity"
             android:label="Locate your Friends"
             android:theme="@android:style/Theme.NoTitleBar" >

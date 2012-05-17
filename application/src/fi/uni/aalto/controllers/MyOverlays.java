@@ -19,7 +19,7 @@ public class MyOverlays extends ItemizedOverlay<OverlayItem>
 	private static int maxNum = 100;
 	
 	private ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
-	private ArrayList<ArrayList<String>> friends = new ArrayList<ArrayList<String>>();
+	private ArrayList<String> infos = new ArrayList<String>();
 	private int index = 0;
 
 	private Context context;
@@ -36,7 +36,7 @@ public class MyOverlays extends ItemizedOverlay<OverlayItem>
 	}
 
 
-	public void addOverlay(OverlayItem newOverlay, ArrayList<String> friendList) 
+	public void addOverlay(OverlayItem newOverlay,String info) 
 	{
 		if(index == maxNum)
 		{
@@ -45,7 +45,7 @@ public class MyOverlays extends ItemizedOverlay<OverlayItem>
 		else
 		{
 			overlays.add(index, newOverlay);
-			friends.add(friendList);
+			infos.add(info);
 			index++;
 			populate();
 		}
@@ -60,12 +60,9 @@ public class MyOverlays extends ItemizedOverlay<OverlayItem>
 	protected boolean onTap(int index) {
 		
 		Builder builder = new AlertDialog.Builder(context);
-		String sFriends = "The following friends living here: \n";
-		for( int i = 0; i < friends.size(); i++)
-		{
-			sFriends += friends.get(index);
-		}
-		builder.setMessage(sFriends);
+		String info = infos.get(index);
+		
+		builder.setMessage(info);
 		builder.setCancelable(true);
 		AlertDialog dialog = builder.create();
 		dialog.setButton("ok", new DialogInterface.OnClickListener() {
@@ -76,6 +73,8 @@ public class MyOverlays extends ItemizedOverlay<OverlayItem>
 		dialog.show();
 		return true;
 	};
+	
+	
 
 
 }

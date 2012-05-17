@@ -305,16 +305,16 @@ def createPost(request):
         if request.method == "GET":
             return render_to_response('create.html', {"user":user})
         else:
-            try:
-                    Post.objects.get(owner = user, title = request.POST['title'].replace(" ", "_"))
+             # try:
+            #          Post.objects.get(owner = user, title = request.POST['title'].replace(" ", "_"))
                     # If the post already exists, tell user.
-                    explan = 'An post with this name ("' + request.POST['title']
-                    explan +=  '") already exists.<a href="/post/create" title="Create new post"> Please,Try again</a>'
-                    if vapp:
-            		return render_to_response ('info' + '.xml', {"explan":explan, "user":user}, mimetype="application/xml")
-        	    else:
-			return render_to_response("info.html", {"explan":explan, "user":user})
-            except Post.DoesNotExist:
+               #       explan = 'An post with this name ("' + request.POST['title']
+               #       explan +=  '") already exists.<a href="/post/create" title="Create new post"> Please,Try again</a>'
+               #       if vapp:
+              #		return render_to_response ('info' + '.xml', {"explan":explan, "user":user}, mimetype="application/xml")
+        	  #    else:
+		  #	return render_to_response("info.html", {"explan":explan, "user":user})
+  #            except Post.DoesNotExist:
                     # Post name in the database is stored replacing blanks by "_"
                     title = request.POST['title'].replace(" ", "_")
                     post = Post(title=title,

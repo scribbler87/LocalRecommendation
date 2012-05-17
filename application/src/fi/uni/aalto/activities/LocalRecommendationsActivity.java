@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,16 +24,21 @@ import com.facebook.android.DialogError;
 import com.facebook.android.Facebook;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Facebook.DialogListener;
+import com.google.android.maps.GeoPoint;
 
 import fi.uni.aalto.activities.R;
 import fi.uni.aalto.controllers.FBConnectionActivity;
 import fi.uni.aalto.controllers.HTTPHelper;
+import fi.uni.aalto.controllers.MathHelper;
 import fi.uni.aalto.controllers.Post;
 import fi.uni.aalto.controllers.XMLHelper;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -42,15 +48,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 public class LocalRecommendationsActivity extends FBConnectionActivity {
 
 
-	private ArrayList<Post> posts; 
+	public static ArrayList<Post> posts; 
 	private Post actPost = null;
 	private int nextPost;
 	private Facebook mFacebook;
@@ -61,34 +70,34 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 	public static String first_name;
 	public static String access_token;
 	public static long expires;
-	private CheckBox checkMyPost;
 	public static final String APP_ID = "209858342455450";
-	private boolean myPost = false;
 	private ImageView actPic;
+	public static int[] lastKnowPosition;
 	public static final String BASE_ADDRESS = "http://80.221.9.59:47314";
 	public static final String urlLogin = BASE_ADDRESS + "/mobilelogin";
 	public static final String urlLocation = BASE_ADDRESS  + "/location";
-
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.social_gags);
+		setContentView(R.layout.local_recommendation);
 
+		lastKnowPosition = getGPS();
 		
-		Button shareButton= (Button) findViewById(R.id.buttonShare);
+		ImageButton shareButton= (ImageButton) findViewById(R.id.buttonShare);
 		shareButton.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View v) {
 				postPicOnWall();
 			}
 		});
-		
+
 		setConnection();
 
 		mFacebook = new Facebook(APP_ID);
 		mAsyncRunner = new AsyncFacebookRunner(mFacebook);
-		
+
 
 		if(!this.isSession())
 		{
@@ -98,18 +107,18 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 		{
 			if(this.isSession())
 			{
-				
+
 				extractUserData();
 				postPicOnWall();
-				
+
 			}
 			try {
-				
+
 				// send login data, to check if the user is in the db,
 				// and if not, a new user is created with the fb data
 				HTTPHelper.getPostData(first_name, last_name, expires,
 						USER_ID, access_token,urlLogin);
-				
+
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -121,29 +130,9 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 
 		nextPost = 0;
 
-		checkMyPost = (CheckBox) findViewById(R.id.checkBoxMyPosts);
-		checkMyPost.setOnClickListener(new OnClickListener() {
 
-			public void onClick(View v) {
-				myPost =  !myPost;
-				checkMyPost.setChecked(myPost);
-				
-				try {
-					getPosts();
-				} catch (ParserConfigurationException e) {
-					e.printStackTrace();
-				} catch (SAXException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (URISyntaxException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
 		actPic = (ImageView) findViewById(R.id.imageViewPost);
-		
+
 
 
 		Button buttonNextComment = (Button) findViewById(R.id.buttonNextComment);
@@ -171,6 +160,8 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 			e.printStackTrace();
 		}
 
+		
+		
 
 	}
 
@@ -179,8 +170,6 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 	{
 		if(this.isSession())
 		{
-			
-			
 			Bundle parameters = new Bundle();
 
 			if(actPost == null)
@@ -189,60 +178,36 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 			parameters.putString("name", actPost.getTitle());
 			parameters.putString("picture", actPost.getUrl());
 			parameters.putString("description", actPost.getDescription());
-			
+
 			mFacebook.dialog(this, "stream.publish", parameters, new DialogListener() {
-				
+
 				public void onFacebookError(FacebookError e) {
-					
 				}
-				
+
 				public void onError(DialogError e) {
-					
 				}
-				
+
 				public void onComplete(Bundle values) {
-					
 				}
-				
+
 				public void onCancel() {
-					
 				}
 			});
 		}
 	}
-	
-	/*	/*
-	 * 
-	 * 
-	 *   <post>
-            <title>Mortadelo_Y_filemon</title>
-            <description>El primero</description>
-            <user>admin</user>
-            <date>April 16, 2012, 10:53 a.m.</date>
-            <link>http://1.bp.blogspot.com/-P_pPrgZABAU/TVOR5J_PqYI/AAAAAAAAbnM/kqL-BpL889A/s1600/Gag9.jpg</link>
-            <!--
-            <div class="social">
-                <form method="post" action='/post/admin/Mortadelo_Y_filemon'>
 
-                    <input type="image" value="" src="/statics/fb.jpg" onsubmit="submit-form();"/>
-
-                </form>
-
-            </div>
-            -->
-	 **/
 
 	private void getPosts() throws ParserConfigurationException, SAXException,
 	IOException, URISyntaxException {
 		//			 create url for getting information about location from the according woeid
-//		String urlString = "http://group14.naf.cs.hut.fi/";
+		//		String urlString = "http://group14.naf.cs.hut.fi/";
 		String urlString = BASE_ADDRESS;
-		
-		if(this.myPost)
-		{
-			urlString += "post/" + USER_ID;
-			this.posts = new ArrayList<Post>();
-		}
+
+		//		if(this.myPost)
+		//		{
+		//			urlString += "post/" + USER_ID;
+		//			this.posts = new ArrayList<Post>();
+		//		}
 
 
 		// create a new factory, which defines the API for the DOM-Parser
@@ -305,25 +270,51 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 				Post post = new Post();
 				post.setDate(date);
 				post.setTitle(title);
-				post.setUrl(link);
 				post.setDescription(description);
 
-				posts.add(post);
+				int sepInd = link.indexOf(";");
+				int sepInd2 = link.indexOf(";", sepInd+1);
+
+
+				String extractedString = link.substring(sepInd+1, sepInd2);
+				int latitude  = 	Integer.valueOf(extractedString);
+
+				extractedString = link.substring(sepInd2+1, link.length());
+				int  longitude  =   Integer.valueOf(extractedString);
+
+
+				link = link.substring(0, sepInd);
+				post.setUrl(link);
+				
+				post.setLatitude(latitude);
+				post.setLongtitude(longitude);
+
+				
+				// check if it in the range
+				if(!SettingsActivity.restricted)
+					posts.add(post);
+				else
+				{
+					int restriction = SettingsActivity.restriction;
+					//calc distance between last know position and actual recommendation
+					double distance = MathHelper.distance(((double)post.getLatitude()) /  1E6 ,
+							((double)post.getLongitude()) /  1E6,
+							((double)this.lastKnowPosition[0]) /  1E6,
+							((double)this.lastKnowPosition[1]) /  1E6,
+							"K");
+					
+					System.err.println("distance: " + distance);
+					System.err.println("restiction: " + restriction);
+					
+					if((distance < restriction))
+						posts.add(post);
+				}
+				
 			}
 			if(posts.size() >= 1)
 				putNextImageToImageView();
 			else
-			{
-				if(myPost)
-				{
-					Toast.makeText(LocalRecommendationsActivity.this,"You don't have post any pictures yet. Switch to general view.", Toast.LENGTH_SHORT).show();
-					this.myPost = false;
-					this.checkMyPost.setChecked(this.myPost);
-					getPosts();
-				}
-				else
-					Toast.makeText(LocalRecommendationsActivity.this,"There are no posts in the server.", Toast.LENGTH_SHORT).show();
-			}
+				Toast.makeText(LocalRecommendationsActivity.this,"There are no posts in the server.", Toast.LENGTH_SHORT).show();
 		}
 
 
@@ -331,8 +322,6 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 
 	public void putNextImageToImageView() throws URISyntaxException, IOException
 	{
-
-
 		if(posts.size() == 0)
 		{
 			Toast.makeText(LocalRecommendationsActivity.this,"There is no post at the moment. Please login.", Toast.LENGTH_SHORT).show();
@@ -348,11 +337,26 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 		descriptionTV.setText("Description: " + actPost.getDescription());
 
 
-		
-
 		String urlString = actPost.getUrl();
-		
-		Toast.makeText(LocalRecommendationsActivity.this,"lat and long: " +  urlString, Toast.LENGTH_SHORT).show();
+
+		URL url = null;
+		try{
+			url = new URL(urlString);
+			if(url != null)
+			{
+				InputStream openStream = url.openStream();
+				actPic.setImageBitmap(BitmapFactory.decodeStream(openStream));
+				openStream.close();
+			}
+		}
+		catch(MalformedURLException exception)
+		{
+			Toast.makeText(LocalRecommendationsActivity.this,
+					"This is not a valid url for this picture", Toast.LENGTH_SHORT).show();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		if(nextPost + 1 < posts.size())
 		{
@@ -377,7 +381,7 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 		first_name = sharedPrefs.getString("first_name", "x");
 		last_name = sharedPrefs.getString("last_name", "x");
 	}
-	
+
 	public AsyncFacebookRunner getmAsyncRunner() {
 		return mAsyncRunner;
 	}
@@ -385,6 +389,45 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 
 	public void setmAsyncRunner(AsyncFacebookRunner mAsyncRunner) {
 		this.mAsyncRunner = mAsyncRunner;
+	}
+	
+	private int[] getGPS() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);  
+        List<String> providers = lm.getProviders(true);
+
+        /* Loop over the array backwards, and if you get an accurate location, then break out the loop*/
+        Location l = null;
+        
+        for (int i=providers.size()-1; i>=0; i--) {
+                l = lm.getLastKnownLocation(providers.get(i));
+                if (l != null) break;
+        }
+        
+        int[] gps = new int[2];
+        if (l != null) {
+                gps[0] =  (int) (l.getLatitude()*1E6);
+                gps[1] = (int) (l.getLongitude()*1E6);
+        }
+        return gps;
+}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu01, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent = null;
+		switch (item.getItemId()) {
+		case R.id.settingsA:
+			intent = new Intent(LocalRecommendationsActivity.this, SettingsActivity.class);
+			startActivity(intent);
+			break;
+		
+		}
+		return true;
 	}
 
 }

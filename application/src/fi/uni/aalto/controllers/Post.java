@@ -12,6 +12,25 @@ public class Post {
 	private String date;
 	private String description;
 	
+	private int latitude;
+	private int longitude;
+	
+	public int getLongitude() {
+		return longitude;
+	}
+	public int getLatitude() {
+		return latitude;
+	}
+
+	public void setLongtitude(int longitude) {
+		this.longitude = longitude;
+		
+	}
+	public void setLatitude(int latitude) {
+		this.latitude = latitude;
+		
+	}
+	
 	
 	public String getDescription() {
 		return description;
@@ -44,10 +63,13 @@ public class Post {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
 //	public void setDate(String date) {
 //		if(date.length() >0 )
 //			this.date = new Date(date); 
 //	}
+	
+	
 	
 	
 
