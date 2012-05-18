@@ -1,8 +1,0 @@
-
-t working facebook post
---This line, and those below, will be ignored--
-
-A    deepint/project/facebook.py
-M    deepint/project/views.py
-M    deepint/settings.py
-AM   deepint/statics/fb.jpg

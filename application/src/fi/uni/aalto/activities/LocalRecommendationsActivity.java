@@ -73,11 +73,13 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 	public static final String APP_ID = "209858342455450";
 	private ImageView actPic;
 	public static int[] lastKnowPosition;
-	public static final String BASE_ADDRESS = "http://80.221.9.59:47314";
+	public static final String BASE_ADDRESS = "http://xx.xx.xx.xx:PORT";//the same you are using for the server
 	public static final String urlLogin = BASE_ADDRESS + "/mobilelogin";
 	public static final String urlLocation = BASE_ADDRESS  + "/location";
 	
-
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -338,10 +340,11 @@ public class LocalRecommendationsActivity extends FBConnectionActivity {
 
 
 		String urlString = actPost.getUrl();
-
+		System.err.println("urlstring: " + urlString);
 		URL url = null;
 		try{
 			url = new URL(urlString);
+			
 			if(url != null)
 			{
 				InputStream openStream = url.openStream();
