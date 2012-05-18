@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{userT.first_name}} Profile{% endblock %}
+{% block header %}{{userT.first_name}} Profile{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+</script>
+{% endblock %}
+
+
+{%block content %}
+<h1>{{userT.first_name}} Profile</h1>
+  <div id='container'>
+      <div id="picture" style="float:left">
+          <img style="margin: 30px;" alt="{{userT.first_name}}" src="{{extrainfo.picturelink}}"/>
+
+      </div>
+      <div id="info" style="float:left">
+          <p class="bold">First name: </p>
+          <p class="info">{{userT.first_name}}</p>
+          <p class="bold">Last name: </p>
+          <p class="info">{{userT.last_name}}</p>
+          <p class="bold">ID: </p>
+          <p class="info">{{userT.username}}</p>
+          <p class="bold">Gender: </p>
+          <p class="info">{{extrainfo.gender}}</p>
+          <p class="bold">Date of Birth: </p>
+          <p class="info">{{extrainfo.dateofbirth}}</p>
+          <p class="bold">Location: </p>
+          <p class="info">{{extrainfo.userlocation.name}}</p>
+          <p class="bold"><a href="/post/{{userT.username}}">See {{userT.first_name}} posts </a></p>
+
+
+      </div>
+  </div>
+
+{% endblock %}

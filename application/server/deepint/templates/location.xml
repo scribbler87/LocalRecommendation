@@ -1,0 +1,13 @@
+{% extends "base.xml" %}
+<!-- Do you see this comment? -->
+{% block content %}
+     {% for locations,friendsList in dictFriends.items %}
+     <place>
+     <location>{{locations}}</location>
+        {% for f in friendsList %}
+        <friend>{{f}}</friend>
+
+        {% endfor %}
+     </place>
+     {% endfor %}
+{% endblock %}

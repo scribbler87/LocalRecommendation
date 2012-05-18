@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    {% if posts %}
+        {% for post in posts %}
+           {% include "post.html" %}
+        {% endfor %}
+    {% else %}
+        <p>This user has not published any post</p>
+    {% endif %}
+{% endblock %}

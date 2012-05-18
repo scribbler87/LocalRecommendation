@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+    {% if post %}
+           {% include "post.html" %}
+    {% else %}
+        <p>This post doesn't exist</p>
+    {% endif %}
+{% endblock %}
