@@ -4,11 +4,10 @@ LocalRecommendation
 Social network for local recommendation such as restaurants
 
 GET THE REPO:
-
 git clone git@github.com:scribbler87/LocalRecommendation.git
 
-HOW TO START THE LOCAL DJANGO SERVER:
 
+HOW TO START THE LOCAL DJANGO SERVER:
 cd $YOUR_PAHT/LocalRecommendation/application/server/deepint
 python manage.py runserver IP_ADDRESS:PORT
 
@@ -23,9 +22,8 @@ Import--> import project from existing sourcecode:
 Then right click on the application project--> properties--> android
 --> add the facebook project as a library
 
-START AND PLAY WITH THE APPLICATION
 
-
+START AND PLAY WITH THE APPLICATION:
 In this project you can find examples for:
 - facebook connect
 - server side usage of graph api
